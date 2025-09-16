@@ -1,0 +1,15 @@
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\bin\Debug\net8.0\ControleDeEstacionamento.Domain.deps.json
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\bin\Debug\net8.0\ControleDeEstacionamento.Domain.runtimeconfig.json
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\bin\Debug\net8.0\ControleDeEstacionamento.Domain.dll
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\bin\Debug\net8.0\ControleDeEstacionamento.Domain.pdb
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.csproj.AssemblyReference.cache
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.AssemblyInfoInputs.cache
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.AssemblyInfo.cs
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.csproj.CoreCompileInputs.cache
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.sourcelink.json
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.dll
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\refint\ControleDeEstacionamento.Domain.dll
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.pdb
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ControleDeEstacionamento.Domain.genruntimeconfig.cache
+E:\Documentos\APIs\API-controle-de-estacionamento\ControleDeEstacionamento.Domain\obj\Debug\net8.0\ref\ControleDeEstacionamento.Domain.dll

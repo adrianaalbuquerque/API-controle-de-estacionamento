@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ControleDeEstacionamento.API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Estacionamento/entrada": {
+      "post": {
+        "tags": [
+          "Estacionamento"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarroDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarroDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarroDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Estacionamento/saida": {
+      "post": {
+        "tags": [
+          "Estacionamento"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntradaSaidaDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntradaSaidaDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntradaSaidaDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Estacionamento/preco": {
+      "post": {
+        "tags": [
+          "Estacionamento"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrecoEstacionamentoDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrecoEstacionamentoDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrecoEstacionamentoDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CarroDTO": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntradaSaidaDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "placaCarro": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataEntrada": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataSaida": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "valorAPagar": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrecoEstacionamentoDTO": {
+        "type": "object",
+        "properties": {
+          "valorHoraInicial": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorHoraAdicional": {
+            "type": "number",
+            "format": "double"
+          },
+          "dataInicioVigencia": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataFimVigencia": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

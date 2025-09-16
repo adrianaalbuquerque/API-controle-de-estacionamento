@@ -3,12 +3,47 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.API", "ControleDeEstacionamento.API\ControleDeEstacionamento.API.csproj", "{7FF63B1B-DE76-4BD5-AC39-6C781E162F4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.Domain", "ControleDeEstacionamento.Domain\ControleDeEstacionamento.Domain.csproj", "{4666B07B-D422-4BD2-AF56-70CC6DE755F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.Application", "ControleDeEstacionamento.Application\ControleDeEstacionamento.Application.csproj", "{928DBDDF-E21E-4833-9B9B-BCCE95E24117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.Infrastructure", "ControleDeEstacionamento.Infrastructure\ControleDeEstacionamento.Infrastructure.csproj", "{8C32DCA4-4351-4F10-8D37-7BE6E1C5AC2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.Tests", "ControleDeEstacionamento.Tests\ControleDeEstacionamento.Tests.csproj", "{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FF63B1B-DE76-4BD5-AC39-6C781E162F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF63B1B-DE76-4BD5-AC39-6C781E162F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF63B1B-DE76-4BD5-AC39-6C781E162F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF63B1B-DE76-4BD5-AC39-6C781E162F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4666B07B-D422-4BD2-AF56-70CC6DE755F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4666B07B-D422-4BD2-AF56-70CC6DE755F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4666B07B-D422-4BD2-AF56-70CC6DE755F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4666B07B-D422-4BD2-AF56-70CC6DE755F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{928DBDDF-E21E-4833-9B9B-BCCE95E24117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{928DBDDF-E21E-4833-9B9B-BCCE95E24117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{928DBDDF-E21E-4833-9B9B-BCCE95E24117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{928DBDDF-E21E-4833-9B9B-BCCE95E24117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C32DCA4-4351-4F10-8D37-7BE6E1C5AC2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C32DCA4-4351-4F10-8D37-7BE6E1C5AC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C32DCA4-4351-4F10-8D37-7BE6E1C5AC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C32DCA4-4351-4F10-8D37-7BE6E1C5AC2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8046BE7D-A003-4D1F-9930-7F63439AE203}
 	EndGlobalSection
 EndGlobal
