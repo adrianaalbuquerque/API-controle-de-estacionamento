@@ -22,12 +22,8 @@ namespace ControleDeEstacionamento.Model.Services
 
         public async Task RegistrarEntradaAsync(string placa)
         {
-           if (string.IsNullOrWhiteSpace(placa))
-                throw new PlacaInvalidaException(placa);
-
-           placa = NormalizarPlaca(placa);
-           if (!await _carroRepository.ValidaPlacaAsync(placa))                
-                throw new PlacaInvalidaException(placa);
+            var placaNormalizada = await ValidarENormalizarPlacaAsync(placa);
+            placa = placaNormalizada;
 
             var existeCarro = await _carroRepository.ObterCarroAsync(placa);
             var existeCarroSemSaida = await _entradaSaidaRepository.ExisteCarroSemSaidaAsync(placa);
@@ -43,17 +39,34 @@ namespace ControleDeEstacionamento.Model.Services
                 PlacaCarro = placa,
                 DataEntrada = dataEntrada
             };
+
+            if (entrada.DataEntrada > DateTime.UtcNow)
+                throw new DataEntradaInvalidaException(entrada.PlacaCarro);
+
             await _entradaSaidaRepository.RegistrarEntradaAsync(entrada);
         }
 
         public async Task<EntradaSaidaDTO?> RegistrarSaidaAsync(string placa)
         {
+            var placaNormalizada = await ValidarENormalizarPlacaAsync(placa);
+            placa = placaNormalizada;
+
+            var existeCarro = await _carroRepository.ObterCarroAsync(placa);
+            if (existeCarro == null)
+                throw new CarroNaoEncontradoException(placa);
+
             var ultimaEntradaSaida = await _entradaSaidaRepository.BuscaUltimaEntradaSaidaAsync(placa);
 
-            if (ultimaEntradaSaida == null || ultimaEntradaSaida.DataSaida != null)
-                return null;
+            if (ultimaEntradaSaida == null)
+                throw new EntradaNaoEncontradaException(placa);
+
+            if (ultimaEntradaSaida.DataSaida != null)
+                throw new SaidaJaRegistradaException(placa);
 
             ultimaEntradaSaida.DataSaida = DateTime.UtcNow;
+
+            if (ultimaEntradaSaida.DataSaida < ultimaEntradaSaida.DataEntrada)
+                throw new DataHoraSaidaAnteriorAEntradaException();
 
             var precoVigente = await _precoEstacionamentoRepository.BuscaPrecoEstacionamentoVigenteAsync();
 
@@ -93,5 +106,18 @@ namespace ControleDeEstacionamento.Model.Services
         {
             return placa.Trim().ToUpper().Replace("-", "");
         }
+        public async Task<string> ValidarENormalizarPlacaAsync(string placa)
+        {
+            if (string.IsNullOrWhiteSpace(placa))
+                throw new PlacaInvalidaException(placa);
+
+            placa = NormalizarPlaca(placa);
+
+            if (!await _carroRepository.ValidaPlacaAsync(placa))
+                throw new PlacaInvalidaException(placa);
+
+            return placa;
+        }
+
     }
 }
