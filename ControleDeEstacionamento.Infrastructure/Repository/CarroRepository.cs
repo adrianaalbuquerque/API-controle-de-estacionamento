@@ -1,5 +1,7 @@
 ﻿using ControleDeEstacionamento.Domain.Interfaces;
 using ControleDeEstacionamento.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace ControleDeEstacionamento.Infrastructure.Repository
 {
@@ -10,16 +12,23 @@ namespace ControleDeEstacionamento.Infrastructure.Repository
         {
             _context = context;
         }
-        public async Task<Carro?> BuscarPorPlacaAsync(string placa)
+        public async Task<Carro?> ObterCarroAsync(string placa)
         {
-            var carro = await _context.carro.FindAsync(placa);
-            return carro;
+            return await _context.carro
+                   .FirstOrDefaultAsync(c => c.Placa == placa);
         }
 
         public async Task InsereCarroAsync(Carro carro)
         {
             await _context.carro.AddAsync(carro);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> ValidaPlacaAsync(string placa)
+        {
+            placa = placa.Trim().ToUpper();
+            var regex = new Regex(@"^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$");
+            return await Task.FromResult(regex.IsMatch(placa));
         }
     }
 }

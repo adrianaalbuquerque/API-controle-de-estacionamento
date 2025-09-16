@@ -7,5 +7,6 @@ namespace ControleDeEstacionamento.Domain.Interfaces
         public Task<EntradaSaida> BuscaUltimaEntradaSaidaAsync(string placa);
         public Task RegistrarEntradaAsync(EntradaSaida entrada);
         public Task RegistraSaidaAsync(EntradaSaida saida);
+        public Task<bool> ExisteCarroSemSaidaAsync(string placa);
     }
 }

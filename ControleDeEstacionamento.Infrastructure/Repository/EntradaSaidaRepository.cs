@@ -32,5 +32,11 @@ namespace ControleDeEstacionamento.Infrastructure.Repository
             _context.Update(saida);
             await _context.SaveChangesAsync();
         }
+        public async Task<bool> ExisteCarroSemSaidaAsync(string placa)
+        {
+            var existeCarroSemSaida = await _context.entrada_saida
+                    .AnyAsync(e => e.PlacaCarro == placa && e.DataSaida == null);
+            return existeCarroSemSaida;
+        }
     }
 }

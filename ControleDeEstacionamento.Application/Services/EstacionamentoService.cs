@@ -1,4 +1,5 @@
 ﻿using ControleDeEstacionamento.Application.DTOs;
+using ControleDeEstacionamento.Domain.Exceptions;
 using ControleDeEstacionamento.Domain.Interfaces;
 using ControleDeEstacionamento.Domain.Models;
 using ControleDeEstacionamento.Infrastructure.Repository;
@@ -21,37 +22,55 @@ namespace ControleDeEstacionamento.Model.Services
 
         public async Task RegistrarEntradaAsync(string placa)
         {
-            var carroExistente = await _carroRepository.BuscarPorPlacaAsync(placa);
-            if (carroExistente == null)
-            {
-                await _carroRepository.InsereCarroAsync(new Carro { Placa = placa });
-            }
+           if (string.IsNullOrWhiteSpace(placa))
+                throw new PlacaInvalidaException(placa);
+
+           placa = NormalizarPlaca(placa);
+           if (!await _carroRepository.ValidaPlacaAsync(placa))                
+                throw new PlacaInvalidaException(placa);
+
+            var existeCarro = await _carroRepository.ObterCarroAsync(placa);
+            var existeCarroSemSaida = await _entradaSaidaRepository.ExisteCarroSemSaidaAsync(placa);
+            if (existeCarro != null)
+                if(existeCarroSemSaida)
+                    throw new CarroComEntradaSemSaidaException(placa);
+                else
+                    await _carroRepository.InsereCarroAsync(new Carro { Placa = placa });
+            
             var dataEntrada = DateTime.UtcNow;
             var entrada = new EntradaSaida
             {
                 PlacaCarro = placa,
                 DataEntrada = dataEntrada
             };
-
             await _entradaSaidaRepository.RegistrarEntradaAsync(entrada);
         }
 
-        public async Task RegistrarSaidaAsync(string placa)
+        public async Task<EntradaSaidaDTO?> RegistrarSaidaAsync(string placa)
         {
             var ultimaEntradaSaida = await _entradaSaidaRepository.BuscaUltimaEntradaSaidaAsync(placa);
 
-            if (ultimaEntradaSaida == null) return;
-            if (ultimaEntradaSaida.DataSaida == null)
-            {
-                return;
-            }            
+            if (ultimaEntradaSaida == null || ultimaEntradaSaida.DataSaida != null)
+                return null;
 
             ultimaEntradaSaida.DataSaida = DateTime.UtcNow;
+
             var precoVigente = await _precoEstacionamentoRepository.BuscaPrecoEstacionamentoVigenteAsync();
-            if(precoVigente == null) return; ///TODO: se tiver null tem que lançar exceção
+
+            if (precoVigente == null)
+                throw new InvalidOperationException("Não há preço vigente cadastrado.");
+
             ultimaEntradaSaida.SetValorAPagar(precoVigente.ValorHoraInicial, precoVigente.ValorHoraAdicional);
 
             await _entradaSaidaRepository.RegistraSaidaAsync(ultimaEntradaSaida);
+
+            var ultimaEntradaSaidaDTO = new EntradaSaidaDTO()
+            {
+                PlacaCarro = ultimaEntradaSaida.PlacaCarro,
+                DataEntrada = ultimaEntradaSaida.DataEntrada,
+                DataSaida = ultimaEntradaSaida.DataSaida
+            };
+            return ultimaEntradaSaidaDTO;
         }
         public async Task AdicionarPrecoEstacionamento(PrecoEstacionamentoDTO precoEstacionamentoDTO)
         {
@@ -69,6 +88,10 @@ namespace ControleDeEstacionamento.Model.Services
 
                 await _precoEstacionamentoRepository.InserePrecoEstacionamentoAsync(precoEstacionamento);
             }; ///TODO: lançar exceção conflitante - o controller que trata
+        }
+        public static string NormalizarPlaca(string placa)
+        {
+            return placa.Trim().ToUpper().Replace("-", "");
         }
     }
 }
