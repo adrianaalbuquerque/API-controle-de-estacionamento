@@ -99,5 +99,33 @@ namespace ControleDeEstacionamento.API.Controllers
 
             return Ok(new { mensagem = "Preço cadastrado com sucesso." });
         }
+
+        [HttpGet("entradas-saidas")]
+        public async Task<ActionResult<IEnumerable<EntradaSaidaDTO>>> BuscarTodasEntradasSaidas()
+        {
+            try
+            {
+                var entradasSaidas = await _service.BuscarTodasEntradasSaidasAsync();
+                return Ok(entradasSaidas);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erro interno do servidor", details = ex.Message });
+            }
+        }
+
+        [HttpGet("precos")]
+        public async Task<ActionResult<IEnumerable<PrecoEstacionamentoDTO>>> BuscarTodosPrecosEstacionamento()
+        {
+            try
+            {
+                var precos = await _service.BuscarTodosPrecosEstacionamentoAsync();
+                return Ok(precos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erro interno do servidor", details = ex.Message });
+            }
+        }
     }
 }

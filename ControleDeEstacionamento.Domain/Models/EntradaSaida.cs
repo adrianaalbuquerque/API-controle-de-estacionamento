@@ -13,7 +13,9 @@ namespace ControleDeEstacionamento.Domain.Models
         public string PlacaCarro { get; set; } = string.Empty;  // FK de carro
         public Carro Carro { get; set; }  // propriedade de navegação
         [Required]
+        [Column(TypeName = "timestamptz")]
         public DateTime DataEntrada { get; set; }
+        [Column(TypeName = "timestamptz")]
         public DateTime? DataSaida { get; set; }
         [Required]
         public decimal ValorAPagar { get; set; }

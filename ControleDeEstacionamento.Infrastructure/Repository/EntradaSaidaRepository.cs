@@ -38,5 +38,13 @@ namespace ControleDeEstacionamento.Infrastructure.Repository
                     .AnyAsync(e => e.PlacaCarro == placa && e.DataSaida == null);
             return existeCarroSemSaida;
         }
+
+        public async Task<IEnumerable<EntradaSaida>> BuscarTodasEntradasSaidasAsync()
+        {
+            return await _context.entrada_saida
+                .Include(e => e.Carro)
+                .OrderByDescending(e => e.DataEntrada)
+                .ToListAsync();
+        }
     }
 }

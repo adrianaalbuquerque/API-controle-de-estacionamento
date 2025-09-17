@@ -45,5 +45,12 @@ namespace ControleDeEstacionamento.Infrastructure.Repository
             return precoEstacionamentoVigente;
         }
 
+        public async Task<IEnumerable<PrecoEstacionamento>> BuscarTodosPrecosEstacionamentoAsync()
+        {
+            return await _context.preco_estacionamento
+                .OrderByDescending(p => p.DataInicioVigencia)
+                .ToListAsync();
+        }
+
     }
 }

@@ -129,5 +129,32 @@ namespace ControleDeEstacionamento.Application.Services
 
             return placa;
         }
+
+        public async Task<IEnumerable<EntradaSaidaDTO>> BuscarTodasEntradasSaidasAsync()
+        {
+            var entradasSaidas = await _entradaSaidaRepository.BuscarTodasEntradasSaidasAsync();
+
+            return entradasSaidas.Select(es => new EntradaSaidaDTO
+            {
+                Id = es.Id,
+                PlacaCarro = es.PlacaCarro,
+                DataEntrada = es.DataEntrada,
+                DataSaida = es.DataSaida,
+                ValorAPagar = es.ValorAPagar
+            });
+        }
+
+        public async Task<IEnumerable<PrecoEstacionamentoDTO>> BuscarTodosPrecosEstacionamentoAsync()
+        {
+            var precos = await _precoEstacionamentoRepository.BuscarTodosPrecosEstacionamentoAsync();
+
+            return precos.Select(p => new PrecoEstacionamentoDTO
+            {
+                ValorHoraInicial = p.ValorHoraInicial,
+                ValorHoraAdicional = p.ValorHoraAdicional,
+                DataInicioVigencia = p.DataInicioVigencia,
+                DataFimVigencia = p.DataFimVigencia
+            });
+        }
     }
 }
