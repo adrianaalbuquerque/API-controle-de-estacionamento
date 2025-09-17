@@ -92,13 +92,40 @@ namespace ControleDeEstacionamento.API.Controllers
             }
         }
 
-        [HttpPost("preco")]
+        [HttpPost("precos")]
         public async Task<IActionResult> AdicionarPreco([FromBody] PrecoEstacionamentoDTO precoEstacionamentoDTO)
         {
-            await _service.AdicionarPrecoEstacionamento(precoEstacionamentoDTO);
-
-            return Ok(new { mensagem = "Preço cadastrado com sucesso." });
+            try
+            {
+                await _service.AdicionarPrecoEstacionamento(precoEstacionamentoDTO);
+                return Ok(new { mensagem = "Preço cadastrado com sucesso." });
+            }
+            catch (VigenciaInvalidaException ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+            catch (ValorHoraInicialInvalidoException ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+            catch (ValorHoraAdicionalInvalidoException ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+            catch (VigenciasComDatasIguais ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }
+            catch (VigenciaDuplicadaException ex)
+            {
+                return Conflict(new { erro = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { erro = "Erro interno ao cadastrar preço.", detalhe = ex.Message });
+            }
         }
+
 
         [HttpGet("entradas-saidas")]
         public async Task<ActionResult<IEnumerable<EntradaSaidaDTO>>> BuscarTodasEntradasSaidas()

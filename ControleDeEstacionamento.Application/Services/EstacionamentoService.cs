@@ -96,6 +96,14 @@ namespace ControleDeEstacionamento.Application.Services
             if (precoEstacionamentoDTO.ValorHoraAdicional < 0)
                 throw new ValorHoraAdicionalInvalidoException();
 
+            if((precoEstacionamentoDTO.DataInicioVigencia < DateTime.UtcNow) || (precoEstacionamentoDTO.DataFimVigencia < DateTime.UtcNow)){
+                throw new VigenciaMenorQueDataAtualException();
+            }
+            if (precoEstacionamentoDTO.DataInicioVigencia == precoEstacionamentoDTO.DataFimVigencia)
+            {
+                throw new VigenciasComDatasIguais();
+            }
+
             var existeVigenciaConflitante = await _precoEstacionamentoRepository
                 .ExisteVigenciaConflitanteAsync(precoEstacionamentoDTO.DataInicioVigencia, precoEstacionamentoDTO.DataFimVigencia);
 
