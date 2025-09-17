@@ -20,6 +20,7 @@ namespace ControleDeEstacionamento.Domain.Models
 
         public void SetValorAPagar(decimal valorHoraInicial, decimal valorHoraAdicional)
         {
+            var toleranciaEmMinutos = 10;
             if (DataSaida == null)
             {
                 throw new NullReferenceException("O veículo ainda não saiu do estacionamento");
@@ -31,14 +32,14 @@ namespace ControleDeEstacionamento.Domain.Models
                 ValorAPagar = valorHoraInicial / 2;
                 return;
             }
-            var tolerancia = TimeSpan.FromMinutes(10);
+            var tolerancia = TimeSpan.FromMinutes(toleranciaEmMinutos);
             if (tempoPassado <= TimeSpan.FromHours(1) + tolerancia)
             {
                 ValorAPagar = valorHoraInicial;
                 return;
             }
-            var horasAdicionais = tempoPassado.Value.TotalHours - 1; // retirando a hora inicial
-            var temHoraExcedente = tempoPassado.Value.Minutes > 10;
+            var horasAdicionais = ((int)tempoPassado.Value.TotalHours) - 1; // retirando a hora inicial
+            var temHoraExcedente = tempoPassado.Value.Minutes > toleranciaEmMinutos;
             ValorAPagar = valorHoraInicial + Convert.ToDecimal(horasAdicionais) * valorHoraAdicional + (temHoraExcedente ? valorHoraAdicional : 0);
         }
     }
