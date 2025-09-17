@@ -11,14 +11,6 @@
         ///  Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         #region Windows Form Designer generated code
 
@@ -90,6 +82,32 @@
             this.dataGridViewPrecos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPrecos.Size = new System.Drawing.Size(850, 400);
             this.dataGridViewPrecos.TabIndex = 2;
+            this.dataGridViewPrecos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "ValorHoraInicial",
+                    HeaderText = "Valor Hora Inicial",
+                    DataPropertyName = "ValorHoraInicial",
+                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle() { Format = "C2" }
+                },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "ValorHoraAdicional",
+                    HeaderText = "Valor Hora Adicional",
+                    DataPropertyName = "ValorHoraAdicional",
+                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle() { Format = "C2" }
+                },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "DataInicioVigencia",
+                    HeaderText = "Início Vigência",
+                    DataPropertyName = "DataInicioVigencia",
+                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle() { Format = "dd/MM/yyyy HH:mm:ss" }
+                },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "DataFimVigencia",
+                    HeaderText = "Fim Vigência",
+                    DataPropertyName = "DataFimVigencia",
+                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle() { Format = "dd/MM/yyyy HH:mm:ss" }
+                }
+            });
 
             //
             // btnAdicionarPreco
@@ -210,6 +228,7 @@
             this.Text = "Controle de Estacionamento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.ControleDeEstacionamento_Load);
 
             this.tabControl.ResumeLayout(false);
             this.tabPagePrecos.ResumeLayout(false);
