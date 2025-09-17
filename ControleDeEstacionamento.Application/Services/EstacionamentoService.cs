@@ -5,7 +5,7 @@ using ControleDeEstacionamento.Domain.Models;
 using ControleDeEstacionamento.Infrastructure.Repository;
 using System.Numerics;
 
-namespace ControleDeEstacionamento.Model.Services
+namespace ControleDeEstacionamento.Application.Services
 {
     public class EstacionamentoService
     {
@@ -87,20 +87,31 @@ namespace ControleDeEstacionamento.Model.Services
         }
         public async Task AdicionarPrecoEstacionamento(PrecoEstacionamentoDTO precoEstacionamentoDTO)
         {
+            if (precoEstacionamentoDTO.DataInicioVigencia > precoEstacionamentoDTO.DataFimVigencia)
+                throw new VigenciaInvalidaException();
+
+            if (precoEstacionamentoDTO.ValorHoraInicial < 0)
+                throw new ValorHoraInicialInvalidoException();
+
+            if (precoEstacionamentoDTO.ValorHoraAdicional < 0)
+                throw new ValorHoraAdicionalInvalidoException();
+
             var existeVigenciaConflitante = await _precoEstacionamentoRepository
                 .ExisteVigenciaConflitanteAsync(precoEstacionamentoDTO.DataInicioVigencia, precoEstacionamentoDTO.DataFimVigencia);
-            if (!existeVigenciaConflitante)
-            {
-                PrecoEstacionamento precoEstacionamento = new PrecoEstacionamento
-                {
-                    DataInicioVigencia = precoEstacionamentoDTO.DataInicioVigencia,
-                    DataFimVigencia = precoEstacionamentoDTO.DataFimVigencia,
-                    ValorHoraInicial = precoEstacionamentoDTO.ValorHoraInicial,
-                    ValorHoraAdicional = precoEstacionamentoDTO.ValorHoraAdicional
-                };
 
-                await _precoEstacionamentoRepository.InserePrecoEstacionamentoAsync(precoEstacionamento);
-            }; ///TODO: lançar exceção conflitante - o controller que trata
+            if(existeVigenciaConflitante)
+                throw new VigenciaDuplicadaException();
+
+            PrecoEstacionamento precoEstacionamento = new PrecoEstacionamento
+            {
+                DataInicioVigencia = precoEstacionamentoDTO.DataInicioVigencia,
+                DataFimVigencia = precoEstacionamentoDTO.DataFimVigencia,
+                ValorHoraInicial = precoEstacionamentoDTO.ValorHoraInicial,
+                ValorHoraAdicional = precoEstacionamentoDTO.ValorHoraAdicional
+            };
+
+            await _precoEstacionamentoRepository.InserePrecoEstacionamentoAsync(precoEstacionamento);
+            
         }
         public static string NormalizarPlaca(string placa)
         {
@@ -118,6 +129,5 @@ namespace ControleDeEstacionamento.Model.Services
 
             return placa;
         }
-
     }
 }

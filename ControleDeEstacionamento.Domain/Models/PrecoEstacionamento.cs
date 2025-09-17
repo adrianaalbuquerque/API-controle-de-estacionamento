@@ -16,9 +16,11 @@ namespace ControleDeEstacionamento.Domain.Models
         public decimal ValorHoraAdicional { get; set; }
 
         [Required]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime DataInicioVigencia { get; set; }
 
         [Required]
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime DataFimVigencia { get; set; }
     }
 }

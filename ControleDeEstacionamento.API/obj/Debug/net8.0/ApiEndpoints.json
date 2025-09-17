@@ -40,8 +40,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "entradaSaidaDTO",
-        "Type": "ControleDeEstacionamento.Application.DTOs.EntradaSaidaDTO",
+        "Name": "placa",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

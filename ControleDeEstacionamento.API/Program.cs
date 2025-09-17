@@ -1,7 +1,7 @@
 using ControleDeEstacionamento.Domain.Interfaces;
 using ControleDeEstacionamento.Infrastructure;
 using ControleDeEstacionamento.Infrastructure.Repository;
-using ControleDeEstacionamento.Model.Services;
+using ControleDeEstacionamento.Application.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

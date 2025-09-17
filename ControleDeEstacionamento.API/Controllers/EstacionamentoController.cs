@@ -1,7 +1,7 @@
 ﻿using ControleDeEstacionamento.Application.DTOs;
 using ControleDeEstacionamento.Domain.Exceptions;
 using ControleDeEstacionamento.Domain.Models;
-using ControleDeEstacionamento.Model.Services;
+using ControleDeEstacionamento.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeEstacionamento.API.Controllers

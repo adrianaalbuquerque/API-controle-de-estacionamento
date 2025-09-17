@@ -40,7 +40,6 @@ namespace ControleDeEstacionamento.Domain.Models
             var horasAdicionais = tempoPassado.Value.TotalHours - 1; // retirando a hora inicial
             var temHoraExcedente = tempoPassado.Value.Minutes > 10;
             ValorAPagar = valorHoraInicial + Convert.ToDecimal(horasAdicionais) * valorHoraAdicional + (temHoraExcedente ? valorHoraAdicional : 0);
-            
         }
     }
 }

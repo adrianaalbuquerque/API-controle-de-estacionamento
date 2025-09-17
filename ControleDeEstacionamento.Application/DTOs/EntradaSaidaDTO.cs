@@ -14,6 +14,6 @@ namespace ControleDeEstacionamento.Application.DTOs
         public string PlacaCarro { get; set; } = string.Empty;
         public DateTime DataEntrada { get; set; }
         public DateTime? DataSaida { get; set; }
-        public decimal ValorAPagar { get; set; }
+        public decimal? ValorAPagar { get; set; }
     }
 }

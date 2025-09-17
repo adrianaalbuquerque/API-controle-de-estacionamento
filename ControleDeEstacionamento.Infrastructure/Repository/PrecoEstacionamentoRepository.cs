@@ -37,11 +37,13 @@ namespace ControleDeEstacionamento.Infrastructure.Repository
 
         public async Task<PrecoEstacionamento?> BuscaPrecoEstacionamentoVigenteAsync()
         {
-            var dataAgora = DateTime.UtcNow;
+            DateTime dataAgora = DateTime.UtcNow;
+
             var precoEstacionamentoVigente = await _context.preco_estacionamento
                 .Where(e => (e.DataInicioVigencia <= dataAgora && e.DataFimVigencia >= dataAgora))
                 .FirstOrDefaultAsync();
             return precoEstacionamentoVigente;
         }
+
     }
 }

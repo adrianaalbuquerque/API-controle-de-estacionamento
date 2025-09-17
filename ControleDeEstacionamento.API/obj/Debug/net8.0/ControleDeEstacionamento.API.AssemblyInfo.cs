@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ControleDeEstacionamento.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6671a1034a4a73e91871b96fe1b45f27f29c5f47")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+caf320e9436ea4b1201eff62b5982747e5faeff2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ControleDeEstacionamento.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ControleDeEstacionamento.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
