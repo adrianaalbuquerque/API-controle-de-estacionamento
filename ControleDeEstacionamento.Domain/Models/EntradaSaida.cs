@@ -17,8 +17,7 @@ namespace ControleDeEstacionamento.Domain.Models
         public DateTime DataEntrada { get; set; }
         [Column(TypeName = "timestamptz")]
         public DateTime? DataSaida { get; set; }
-        [Required]
-        public decimal ValorAPagar { get; set; }
+        public decimal? ValorAPagar { get; set; }
 
         public void SetValorAPagar(decimal valorHoraInicial, decimal valorHoraAdicional)
         {
