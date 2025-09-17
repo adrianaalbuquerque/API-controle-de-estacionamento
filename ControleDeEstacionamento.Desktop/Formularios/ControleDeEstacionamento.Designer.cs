@@ -31,8 +31,7 @@
             this.btnRegistrarEntrada = new System.Windows.Forms.Button();
             this.btnRegistrarSaida = new System.Windows.Forms.Button();
             this.lblTituloEntradasSaidas = new System.Windows.Forms.Label();
-            this.txtPlaca = new System.Windows.Forms.TextBox();
-            this.lblPlaca = new System.Windows.Forms.Label();
+            this.progressBarEntradasSaidas = new System.Windows.Forms.ProgressBar();
 
             this.tabControl.SuspendLayout();
             this.tabPagePrecos.SuspendLayout();
@@ -52,6 +51,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(900, 600);
             this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
 
             //
             // tabPagePrecos
@@ -148,11 +148,10 @@
             // tabPageEntradasSaidas
             //
             this.tabPageEntradasSaidas.Controls.Add(this.dataGridViewEntradasSaidas);
-            this.tabPageEntradasSaidas.Controls.Add(this.lblPlaca);
-            this.tabPageEntradasSaidas.Controls.Add(this.txtPlaca);
             this.tabPageEntradasSaidas.Controls.Add(this.btnRegistrarSaida);
             this.tabPageEntradasSaidas.Controls.Add(this.btnRegistrarEntrada);
             this.tabPageEntradasSaidas.Controls.Add(this.lblTituloEntradasSaidas);
+            this.tabPageEntradasSaidas.Controls.Add(this.progressBarEntradasSaidas);
             this.tabPageEntradasSaidas.Location = new System.Drawing.Point(4, 24);
             this.tabPageEntradasSaidas.Name = "tabPageEntradasSaidas";
             this.tabPageEntradasSaidas.Padding = new System.Windows.Forms.Padding(3);
@@ -177,25 +176,31 @@
             this.dataGridViewEntradasSaidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewEntradasSaidas.Size = new System.Drawing.Size(850, 360);
             this.dataGridViewEntradasSaidas.TabIndex = 5;
-
-            //
-            // lblPlaca
-            //
-            this.lblPlaca.AutoSize = true;
-            this.lblPlaca.Location = new System.Drawing.Point(20, 70);
-            this.lblPlaca.Name = "lblPlaca";
-            this.lblPlaca.Size = new System.Drawing.Size(37, 15);
-            this.lblPlaca.TabIndex = 4;
-            this.lblPlaca.Text = "Placa:";
-
-            //
-            // txtPlaca
-            //
-            this.txtPlaca.Location = new System.Drawing.Point(65, 67);
-            this.txtPlaca.Name = "txtPlaca";
-            this.txtPlaca.Size = new System.Drawing.Size(120, 23);
-            this.txtPlaca.TabIndex = 3;
-            this.txtPlaca.PlaceholderText = "Ex: ABC1234";
+            this.dataGridViewEntradasSaidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "PlacaCarro",
+                    HeaderText = "Placa",
+                    DataPropertyName = "PlacaCarro"
+                },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "DataEntrada",
+                    HeaderText = "Data Entrada",
+                    DataPropertyName = "DataEntrada",
+                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle() { Format = "dd/MM/yyyy HH:mm:ss" }
+                },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "DataSaida",
+                    HeaderText = "Data Saída",
+                    DataPropertyName = "DataSaida",
+                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle() { Format = "dd/MM/yyyy HH:mm:ss" }
+                },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() {
+                    Name = "ValorAPagar",
+                    HeaderText = "Valor a Pagar",
+                    DataPropertyName = "ValorAPagar",
+                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle() { Format = "C2" }
+                }
+            });
 
             //
             // btnRegistrarSaida
@@ -207,6 +212,7 @@
             this.btnRegistrarSaida.TabIndex = 2;
             this.btnRegistrarSaida.Text = "Registrar Saída";
             this.btnRegistrarSaida.UseVisualStyleBackColor = true;
+            this.btnRegistrarSaida.Click += new System.EventHandler(this.btnRegistrarSaida_Click);
 
             //
             // btnRegistrarEntrada
@@ -218,6 +224,7 @@
             this.btnRegistrarEntrada.TabIndex = 1;
             this.btnRegistrarEntrada.Text = "Registrar Entrada";
             this.btnRegistrarEntrada.UseVisualStyleBackColor = true;
+            this.btnRegistrarEntrada.Click += new System.EventHandler(this.btnRegistrarEntrada_Click);
 
             //
             // lblTituloEntradasSaidas
@@ -229,6 +236,16 @@
             this.lblTituloEntradasSaidas.Size = new System.Drawing.Size(160, 24);
             this.lblTituloEntradasSaidas.TabIndex = 0;
             this.lblTituloEntradasSaidas.Text = "Entradas e Saídas";
+
+            //
+            // progressBarEntradasSaidas
+            //
+            this.progressBarEntradasSaidas.Location = new System.Drawing.Point(20, 50);
+            this.progressBarEntradasSaidas.Name = "progressBarEntradasSaidas";
+            this.progressBarEntradasSaidas.Size = new System.Drawing.Size(300, 20);
+            this.progressBarEntradasSaidas.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarEntradasSaidas.TabIndex = 6;
+            this.progressBarEntradasSaidas.Visible = false;
 
             //
             // ControleDeEstacionamento
@@ -266,7 +283,6 @@
         private System.Windows.Forms.Button btnRegistrarEntrada;
         private System.Windows.Forms.Button btnRegistrarSaida;
         private System.Windows.Forms.Label lblTituloEntradasSaidas;
-        private System.Windows.Forms.TextBox txtPlaca;
-        private System.Windows.Forms.Label lblPlaca;
+        private System.Windows.Forms.ProgressBar progressBarEntradasSaidas;
     }
 }

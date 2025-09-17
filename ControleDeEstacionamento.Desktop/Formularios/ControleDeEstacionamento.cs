@@ -18,6 +18,18 @@ namespace ControleDeEstacionamento.Desktop.Formularios
             await CarregarPrecos();
         }
 
+        private async void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tabPageEntradasSaidas)
+            {
+                await CarregarEntradasSaidas();
+            }
+            else if (tabControl.SelectedTab == tabPagePrecos)
+            {
+                await CarregarPrecos();
+            }
+        }
+
         private async Task CarregarPrecos()
         {
             try
@@ -53,12 +65,65 @@ namespace ControleDeEstacionamento.Desktop.Formularios
             return dataUtc.AddHours(-3);
         }
 
+        private async Task CarregarEntradasSaidas()
+        {
+            try
+            {
+                progressBarEntradasSaidas.Visible = true;
+                dataGridViewEntradasSaidas.Enabled = false;
+                btnRegistrarEntrada.Enabled = false;
+                btnRegistrarSaida.Enabled = false;
+
+                var entradasSaidas = await _apiClient.BuscarTodasEntradasSaidasAsync();
+
+                foreach (var entrada in entradasSaidas)
+                {
+                    entrada.DataEntrada = ConverterParaUtcMenos3(entrada.DataEntrada);
+                    if (entrada.DataSaida.HasValue)
+                    {
+                        entrada.DataSaida = ConverterParaUtcMenos3(entrada.DataSaida.Value);
+                    }
+                }
+
+                dataGridViewEntradasSaidas.DataSource = entradasSaidas;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                progressBarEntradasSaidas.Visible = false;
+                dataGridViewEntradasSaidas.Enabled = true;
+                btnRegistrarEntrada.Enabled = true;
+                btnRegistrarSaida.Enabled = true;
+            }
+        }
+
         private async void btnAdicionarPreco_Click(object sender, EventArgs e)
         {
             var form = new AdicionarPrecoForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 await CarregarPrecos();
+            }
+        }
+
+        private async void btnRegistrarEntrada_Click(object sender, EventArgs e)
+        {
+            var form = new RegistrarEntradaForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                await CarregarEntradasSaidas();
+            }
+        }
+
+        private async void btnRegistrarSaida_Click(object sender, EventArgs e)
+        {
+            var form = new RegistrarSaidaForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                await CarregarEntradasSaidas();
             }
         }
 
