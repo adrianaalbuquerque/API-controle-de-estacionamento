@@ -85,6 +85,10 @@ namespace ControleDeEstacionamento.API.Controllers
             {
                 return BadRequest(new { erro = ex.Message });
             }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { erro = ex.Message });
+            }            
             catch (Exception ex)
             {
                 // Logar se quiser
@@ -122,7 +126,7 @@ namespace ControleDeEstacionamento.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { erro = "Erro interno ao cadastrar preço.", detalhe = ex.Message });
+                return StatusCode(500, new { erro = ex.Message });
             }
         }
 
@@ -137,7 +141,7 @@ namespace ControleDeEstacionamento.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Erro interno do servidor", details = ex.Message });
+                return StatusCode(500, new { message = ex.Message });
             }
         }
 
@@ -151,7 +155,7 @@ namespace ControleDeEstacionamento.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Erro interno do servidor", details = ex.Message });
+                return StatusCode(500, new { message = ex.Message });
             }
         }
     }

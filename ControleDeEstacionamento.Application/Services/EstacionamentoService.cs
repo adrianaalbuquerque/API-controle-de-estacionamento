@@ -25,13 +25,17 @@ namespace ControleDeEstacionamento.Application.Services
             var placaNormalizada = await ValidarENormalizarPlacaAsync(placa);
             placa = placaNormalizada;
 
-            var existeCarro = await _carroRepository.ObterCarroAsync(placa);
+            var carroExistente = await _carroRepository.ObterCarroAsync(placa);
             var existeCarroSemSaida = await _entradaSaidaRepository.ExisteCarroSemSaidaAsync(placa);
-            if (existeCarro != null)
-                if(existeCarroSemSaida)
+            if (carroExistente != null)
+            {
+                if (existeCarroSemSaida)
                     throw new CarroComEntradaSemSaidaException(placa);
-                else
-                    await _carroRepository.InsereCarroAsync(new Carro { Placa = placa });
+            } 
+            else
+            {
+                await _carroRepository.InsereCarroAsync(new Carro { Placa = placa });
+            }                    
             
             var dataEntrada = DateTime.UtcNow;
             var entrada = new EntradaSaida
@@ -81,7 +85,8 @@ namespace ControleDeEstacionamento.Application.Services
             {
                 PlacaCarro = ultimaEntradaSaida.PlacaCarro,
                 DataEntrada = ultimaEntradaSaida.DataEntrada,
-                DataSaida = ultimaEntradaSaida.DataSaida
+                DataSaida = ultimaEntradaSaida.DataSaida,
+                ValorAPagar = ultimaEntradaSaida.ValorAPagar
             };
             return ultimaEntradaSaidaDTO;
         }
