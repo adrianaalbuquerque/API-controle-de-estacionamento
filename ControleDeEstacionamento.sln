@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.Tests", "ControleDeEstacionamento.Tests\ControleDeEstacionamento.Tests.csproj", "{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstacionamento.Desktop", "ControleDeEstacionamento.Desktop\ControleDeEstacionamento.Desktop.csproj", "{3816ABD8-F03E-4547-8615-CBD592DCC485}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC573BE-AFA7-4DBB-9AC4-C9363789B7A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3816ABD8-F03E-4547-8615-CBD592DCC485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3816ABD8-F03E-4547-8615-CBD592DCC485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3816ABD8-F03E-4547-8615-CBD592DCC485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3816ABD8-F03E-4547-8615-CBD592DCC485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
