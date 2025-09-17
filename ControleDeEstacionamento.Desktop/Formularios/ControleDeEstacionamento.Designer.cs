@@ -26,6 +26,7 @@
             this.dataGridViewPrecos = new System.Windows.Forms.DataGridView();
             this.btnAdicionarPreco = new System.Windows.Forms.Button();
             this.lblTituloPrecos = new System.Windows.Forms.Label();
+            this.progressBarPrecos = new System.Windows.Forms.ProgressBar();
             this.dataGridViewEntradasSaidas = new System.Windows.Forms.DataGridView();
             this.btnRegistrarEntrada = new System.Windows.Forms.Button();
             this.btnRegistrarSaida = new System.Windows.Forms.Button();
@@ -58,6 +59,7 @@
             this.tabPagePrecos.Controls.Add(this.dataGridViewPrecos);
             this.tabPagePrecos.Controls.Add(this.btnAdicionarPreco);
             this.tabPagePrecos.Controls.Add(this.lblTituloPrecos);
+            this.tabPagePrecos.Controls.Add(this.progressBarPrecos);
             this.tabPagePrecos.Location = new System.Drawing.Point(4, 24);
             this.tabPagePrecos.Name = "tabPagePrecos";
             this.tabPagePrecos.Padding = new System.Windows.Forms.Padding(3);
@@ -119,6 +121,7 @@
             this.btnAdicionarPreco.TabIndex = 1;
             this.btnAdicionarPreco.Text = "Adicionar Preço";
             this.btnAdicionarPreco.UseVisualStyleBackColor = true;
+            this.btnAdicionarPreco.Click += new System.EventHandler(this.btnAdicionarPreco_Click);
 
             //
             // lblTituloPrecos
@@ -130,6 +133,16 @@
             this.lblTituloPrecos.Size = new System.Drawing.Size(228, 24);
             this.lblTituloPrecos.TabIndex = 0;
             this.lblTituloPrecos.Text = "Preços de Estacionamento";
+
+            //
+            // progressBarPrecos
+            //
+            this.progressBarPrecos.Location = new System.Drawing.Point(20, 50);
+            this.progressBarPrecos.Name = "progressBarPrecos";
+            this.progressBarPrecos.Size = new System.Drawing.Size(300, 20);
+            this.progressBarPrecos.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarPrecos.TabIndex = 3;
+            this.progressBarPrecos.Visible = false;
 
             //
             // tabPageEntradasSaidas
@@ -248,6 +261,7 @@
         private System.Windows.Forms.DataGridView dataGridViewPrecos;
         private System.Windows.Forms.Button btnAdicionarPreco;
         private System.Windows.Forms.Label lblTituloPrecos;
+        private System.Windows.Forms.ProgressBar progressBarPrecos;
         private System.Windows.Forms.DataGridView dataGridViewEntradasSaidas;
         private System.Windows.Forms.Button btnRegistrarEntrada;
         private System.Windows.Forms.Button btnRegistrarSaida;
