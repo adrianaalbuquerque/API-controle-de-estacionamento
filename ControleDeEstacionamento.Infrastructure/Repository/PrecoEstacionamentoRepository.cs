@@ -27,10 +27,9 @@ namespace ControleDeEstacionamento.Infrastructure.Repository
         {
             var existeVigenciaConflitante = await _context.preco_estacionamento
                 .Where(e =>
-                    (dataInicioVigencia <= e.DataInicioVigencia && dataFimVigencia >= e.DataFimVigencia) //dentro
-                        || (dataInicioVigencia >= e.DataInicioVigencia && dataFimVigencia <= e.DataFimVigencia) // fora
-                        || (dataInicioVigencia <= e.DataInicioVigencia && dataFimVigencia <= e.DataFimVigencia) //esquerda
-                        || (dataInicioVigencia >= e.DataInicioVigencia && dataFimVigencia >= e.DataFimVigencia)) // direita
+                    (dataInicioVigencia >= e.DataInicioVigencia && dataInicioVigencia <= e.DataFimVigencia)
+                        || (dataFimVigencia >= e.DataInicioVigencia && dataFimVigencia <= e.DataFimVigencia)
+                        || (dataInicioVigencia <= e.DataInicioVigencia && dataFimVigencia >= e.DataFimVigencia))
                 .AnyAsync();
             return existeVigenciaConflitante;
         }
