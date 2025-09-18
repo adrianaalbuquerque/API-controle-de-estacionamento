@@ -41,7 +41,8 @@ namespace ControleDeEstacionamento.Application.Services
             var entrada = new EntradaSaida
             {
                 PlacaCarro = placa,
-                DataEntrada = dataEntrada
+                DataEntrada = dataEntrada,
+                ValorAPagar = 0
             };
 
             if (entrada.DataEntrada > DateTime.UtcNow)
